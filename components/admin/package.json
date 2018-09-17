@@ -1,0 +1,26 @@
+{
+  "name": "@react/admin",
+  "version": "1.0.0",
+  "main": "index.js",
+  "license": "MIT",
+  "dependencies": {
+    "@material-ui/core": "^3.0.3",
+    "@material-ui/icons": "^3.0.1",
+    "@types/react-router": "^4.0.31",
+    "@types/redux-form": "^7.4.7",
+    "history": "^4.7.2",
+    "react": "^16.5.1",
+    "react-dom": "^16.5.1",
+    "react-redux": "^5.0.7",
+    "react-router": "^4.3.1",
+    "react-router-redux": "^5.0.0-alpha.9",
+    "redux": "^4.0.0",
+    "redux-form": "^7.4.2"
+  },
+  "devDependencies": {
+    "@types/react": "^16.4.14",
+    "@types/react-dom": "^16.0.7",
+    "@types/react-redux": "^6.0.9",
+    "@types/react-router-redux": "^5.0.16"
+  }
+}
