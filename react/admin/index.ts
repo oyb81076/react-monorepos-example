@@ -2,7 +2,7 @@ import * as React from 'react'
 import * as ReactDOM from 'react-dom'
 import './index.css'
 import { configureStore, history } from './app/createStore'
-import App from '@react/admin/app/App'
+import App from './app/App'
 const store = configureStore()
 const MOUNT_NODE = document.getElementById('root') as HTMLElement
 ReactDOM.render(React.createElement(App, { store, history }), MOUNT_NODE)

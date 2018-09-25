@@ -64,7 +64,7 @@ const config: webpack.Configuration = {
   },
   resolve: {
     alias: {
-      "@react": path.join(__dirname, "../../components"),
+      "@react": path.join(__dirname, "../../react"),
     },
     extensions: ['.ts', '.tsx', '.js', '.json'],
     plugins: [],

@@ -5,7 +5,8 @@
   "license": "MIT",
   "private": true,
   "workspaces": [
-    "components/*",
-    "modules/*"
+    "react/*",
+    "app/*",
+    "module/*"
   ]
 }
