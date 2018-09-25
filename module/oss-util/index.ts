@@ -1,7 +1,7 @@
 import { options } from '@module/etc/oss'
 import { file_md5_base64 } from '@module/oss-util/md5'
-import OssClient, { OssError } from "ali-oss"
-export const client = new OssClient(options)
+import OSS, { OssError } from "ali-oss"
+export const client = new OSS(options)
 export const exists = (ossId: string): Promise<boolean> => {
   return client.head(ossId).then(() => true)
     .catch((e: OssError) => {
@@ -25,3 +25,15 @@ export const isNotExistsOrDiff = async (ossId: string, maxAge: number, filename:
   const md5 = await file_md5_base64(filename)
   return md5 !== res.res.headers["content-md5"]
 }
+const sts = new OSS.STS({ accessKeyId: "", accessKeySecret: "" })
+sts.assumeRole("", {
+  Statement: [
+    {
+      Effect: "Allow",
+      Resource: [],
+      Action: []
+    }
+  ],
+  Version: "1",
+}, 3600, "app").then(({ credentials: { AccessKeyId, AccessKeySecret, SecurityToken } }) => {
+})

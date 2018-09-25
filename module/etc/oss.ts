@@ -2,10 +2,11 @@
  * 阿里云oss配置
  */
 export const options = {
-  accessKeyId: "",
-  accessKeySecret: "",
-  bucket: ""
+  accessKeyId: "LTAInLNVKJFRcaLW",
+  accessKeySecret: "3ZxEQjdPSG6s8oBJUslDVWImBGVO8n",
+  bucket: "oyb"
 }
+export const consumerRole = "consumer"
 /**
  * oss外网访问域名
  */

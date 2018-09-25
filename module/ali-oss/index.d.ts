@@ -1,46 +1,22 @@
-declare class STS {
-  constructor(props: { accessKeyId: string, accessKeySecret: string })
-  /**
-   * 
-   * @param role 
-   * @param policy @see https://www.alibabacloud.com/help/zh/doc-detail/31921.html?spm=a2c5t.11065259.1996646101.searchclickresult.57ad12b8QwHcDq
-   * @param expireSeconds 
-   * @param sessionName 
-   */
-  assumeRole(role: string, policy: {
-    Statement: Array<{
-      /**
-       * like:
-       *  [ "oss:GetObject",
-       *  "oss:PutObject",
-       *  "oss:DeleteObject",
-       *  "oss:ListParts",
-       *  "oss:AbortMultipartUpload",
-       *  "oss:MultipartUpload",
-       *  "oss:ListObjects" ]
-       */
-      Action: string[],
-      Effect: "Allow",
-      /**
-       * acs:oss:*:*:<bucket>/<path>
-       * like:
-       *  ["acs:oss:*:*:app-base-oss/*", "acs:oss:*:*:app-base-oss"]
-       */
-      Resource: string[],
-    }>
-    Version: string
-  }, expireSeconds: number, sessionName: string): Promise<{
-    credentials: { AccessKeyId: string, AccessKeySecret: string, SecurityToken: string }
-  }>
-}
-declare class OssClient {
-  STS: STS
-  constructor(opts: OssClient.OssClientOpts)
-  head(id: string): Promise<{ meta: any, res: OssClient.OssRes, status: number }>
-  get(id: string, buffer: NodeJS.WriteStream, options?: OssClient.GetOptions): Promise<{ content: Buffer, res: OssClient.OssRes }>
-  get(id: string, filename: string, options?: OssClient.GetOptions): Promise<{ res: OssClient.OssRes }>
-  getStream(id: string, options?: OssClient.GetStreamOpts): Promise<{ res: OssClient.OssRes, stream: NodeJS.ReadStream }>
-  delete(id: string, options?: { timeout?: number }): Promise<{ res: OssClient.OssRes }>
+type STSAction =
+  "*"
+  | "oss:Get*"
+  | "oss:List*"
+  | "oss:Put*"
+  | "oss:GetObject"
+  | "oss:PutObject"
+  | "oss:DeleteObject"
+  | "oss:ListParts"
+  | "oss:AbortMultipartUpload"
+  | "oss:MultipartUpload"
+  | "oss:ListObjects"
+declare class OSS {
+  constructor(opts: OSS.OssClientOpts)
+  head(id: string): Promise<{ meta: any, res: OSS.Res, status: number }>
+  get(id: string, buffer: NodeJS.WriteStream, options?: OSS.GetOptions): Promise<{ content: Buffer, res: OSS.Res }>
+  get(id: string, filename: string, options?: OSS.GetOptions): Promise<{ res: OSS.Res }>
+  getStream(id: string, options?: OSS.GetStreamOpts): Promise<{ res: OSS.Res, stream: NodeJS.ReadStream }>
+  delete(id: string, options?: { timeout?: number }): Promise<{ res: OSS.Res }>
   /**
    * Copy an object from sourceName to name.
    * @param id 
@@ -48,18 +24,18 @@ declare class OssClient {
    * meaning it's a full name contains the bucket name.
    * e.g.: /otherbucket/logo.png meaning copy otherbucket logn.png object to
    */
-  copy(id: string, source: string, opts?: OssClient.CopyOpts): Promise<OssClient.MetaResult>
+  copy(id: string, source: string, opts?: OSS.CopyOpts): Promise<OSS.MetaResult>
   /**
    * Set an exists object meta.
    * @param name 
    * @param meta user meta, will send with x-oss-meta- prefix string e.g.: { uid: 123, pid: 110 } If meta: null, will clean up the exists meta
    * @param opts 
    */
-  putMeta(name: string, meta: any, opts?: { timeout?: number }): Promise<OssClient.MetaResult>
+  putMeta(name: string, meta: any, opts?: { timeout?: number }): Promise<OSS.MetaResult>
   /**
    * Delete multi objects in one request.
    */
-  deleteMulti(names: string[], opts?: { quiet?: boolean, timeout?: number }): Promise<{ deleted: string[], res: OssClient.OssRes }>
+  deleteMulti(names: string[], opts?: { quiet?: boolean, timeout?: number }): Promise<{ deleted: string[], res: OSS.Res }>
   signatureUrl(name: string, opts: {
     expires: number,
     method?: "GET" | "POST" | "PUT" | "DELETE",
@@ -74,7 +50,7 @@ declare class OssClient {
     parallel?: number,
     partSize?: number,
     checkpoint?: any,
-    progress?: (percentage: number, checkpoint: any, res: OssClient.OssRes) => void | Promise<void>
+    progress?: (percentage: number, checkpoint: any, res: OSS.Res) => void | Promise<void>
     meta?: any
     headers?: {
       "cache-control"?: string,
@@ -83,17 +59,75 @@ declare class OssClient {
       "expires"?: number
     }
   }): Promise<{
-    res: OssClient.OssRes,
+    res: OSS.Res,
     bucket: string,
     name: string,
     etag: string,
     data: any
   }>
   abortMultipartUpload(name: string, uploadId: string, opts?: { timeout?: number }): Promise<void>
+  put(
+    name: string,
+    filename: string | Buffer | NodeJS.ReadableStream | File | Blob,
+    opts?: {
+      timeout?: string
+      mine?: string
+      meta: any,
+      callback?: {
+        url: string
+        host?: string
+        body: string
+        contentType: string
+        customValue: any
+      }
+    },
+    headers?: {
+      "cache-control": string
+      "content-disposition": string
+      "content-encoding": string
+      "expires": number
+    }
+  ): Promise<{ name: string, data: any, res: OSS.Res }>
   cancel(): void
 }
-declare namespace OssClient {
-  interface OssRes {
+declare namespace OSS {
+  class STS {
+    public constructor(props: { accessKeyId: string, accessKeySecret: string })
+    /**
+     * 
+     * @param role 
+     * @param policy
+     *    @see https://www.alibabacloud.com/help/zh/doc-detail/31921.html?spm=a2c5t.11065259.1996646101.searchclickresult.57ad12b8QwHcDq
+     *    @see https://help.aliyun.com/document_detail/28664.html?spm=a2c4g.11186623.6.571.2bfe7df6XLJp0M
+     * @param expireSeconds 
+     * @param sessionName 
+     */
+    assumeRole(role: string, policy: {
+      Statement: Array<{ Action: STSAction[] } | { NotAction: STSAction[] } & {
+        Effect: "Allow" | "Deny",
+        /**
+         * acs:oss:<region>:<account-id>:<bucket>/<id>
+         * like:
+         *  ["acs:oss:*:*:app-base-oss/*", "acs:oss:*:*:app-base-oss"]
+         */
+        Resource: string[],
+        Condition?: {
+          // 发送请求时的客户端 IP 地址
+          IpAddress?: {
+            "acs:SourceIp": string
+          }
+          OSS?: {
+            "oss:Delimiter"?: string
+            "oss:Prefix"?: string
+          }
+        }
+      }>
+      Version: string
+    }, expireSeconds: number, sessionName: string): Promise<{
+      credentials: { AccessKeyId: string, AccessKeySecret: string, SecurityToken: string }
+    }>
+  }
+  interface Res {
     status: number,
     statusCode: number,
     headers: { [key: string]: string }
@@ -159,7 +193,7 @@ declare namespace OssClient {
   }
   interface MetaResult {
     data: { lastModified: string, etag: string }
-    res: OssRes
+    res: Res
   }
   interface OssClientOpts {
     accessKeyId: string // access key you create on aliyun console website
@@ -173,4 +207,4 @@ declare namespace OssClient {
     timeout?: string | number // instance level timeout for all operations, default is 60s
   }
 }
-export = OssClient
+export = OSS
