@@ -1,4 +1,9 @@
 {
   "name": "@module/etc",
-  "private": true
+  "version": "0.0.0",
+  "private": true,
+  "dependencies": {
+    "@types/mongodb": "^3.1.9",
+    "mongodb": "^3.1.6"
+  }
 }

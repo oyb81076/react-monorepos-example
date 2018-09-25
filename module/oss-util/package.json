@@ -1,0 +1,10 @@
+{
+  "private": true,
+  "name": "@module/oss-util",
+  "version": "1.0.0",
+  "dependencies": {
+    "@types/node": "^10.11.0",
+    "ali-oss": "^6.0.1",
+    "co": "4"
+  }
+}
