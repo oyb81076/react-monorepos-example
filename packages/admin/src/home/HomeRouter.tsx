@@ -1,6 +1,6 @@
 import React from "react"
-import { Dashboard, MenuLink, HeaderLink } from '@react/mui/src/dashboard'
-import { RouteComponentProps, Switch, Redirect, Route } from 'react-router'
+import { Dashboard, MenuLink, HeaderLink } from "@app/mui"
+import { RouteComponentProps, Switch, Redirect, Route } from "react-router"
 import NotFound from "../error/NotFound"
 import { Android } from "@material-ui/icons"
 const Main: React.SFC<{ path: string }> = ({ path }) =>

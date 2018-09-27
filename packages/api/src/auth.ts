@@ -1,15 +1,15 @@
 // 放弃cookie, 使用 auth字段
 import koa from "koa"
 import jwt from "jsonwebtoken"
-import { UserRole } from '@module/models'
-import { secret } from "@module/etc/jwt"
+import { UserRole } from "@app/models"
+import { secret } from "@app/etc/src/jwt"
 declare module "koa" {
   interface Context {
     session: {
       id: string,
       role: UserRole,
-      iat: number
-      exp: number // what fuck?
+      iat: number,
+      exp: number, // what fuck?
     }
   }
 }
@@ -63,10 +63,10 @@ export const oneOf = (...roles: UserRole[]): koa.Middleware => {
 
 /**
  * 生成jwt签名
- * @param session 
+ * @param session
  */
 export const sign = (session: koa.Context["session"]): string => {
-  return jwt.sign(session, secret, { noTimestamp: true, expiresIn: '30d' })
+  return jwt.sign(session, secret, { noTimestamp: true, expiresIn: "30d" })
 }
 
 export const root: koa.Middleware = async (ctx, next) => {

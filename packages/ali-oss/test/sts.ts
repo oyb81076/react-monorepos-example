@@ -1,7 +1,7 @@
 import OSS from "ali-oss"
 import * as path from "path"
-import { bucket, endpoint, dir } from "@module/etc/oss"
-import { accessKeyId, accessKeySecret, arn } from "@module/etc/oss-sts"
+import { bucket, endpoint, dir } from "@app/etc/src/oss"
+import { accessKeyId, accessKeySecret, arn } from "@app/etc/src/oss-sts"
 /**
  * 临时令牌上传, 用于客户端, 服务器生成一个授权令牌给客户端, 客户端使用令牌上传
  */

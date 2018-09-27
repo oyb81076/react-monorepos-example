@@ -1,6 +1,6 @@
 {
   "private": true,
-  "name": "@module/oss-util",
+  "name": "@app/oss-util",
   "version": "1.0.0",
   "dependencies": {
     "@types/node": "^10.11.0",

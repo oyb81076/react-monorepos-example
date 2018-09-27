@@ -2,7 +2,7 @@ import { createStore, applyMiddleware, compose, combineReducers, ReducersMapObje
 import { createBrowserHistory } from "history"
 import { routerMiddleware, routerReducer } from "react-router-redux"
 import { reducer as formReducer } from "redux-form"
-import { dashboardReducer } from "@react/mui/src/dashboard/reducer"
+import { dashboardReducer } from "@app/mui"
 export const history = createBrowserHistory()
 const composeEnhancers = window.__REDUX_DEVTOOLS_EXTENSION_COMPOSE__ || compose
 const enhancer = composeEnhancers(

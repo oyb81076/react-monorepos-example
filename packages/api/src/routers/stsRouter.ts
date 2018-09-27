@@ -6,8 +6,8 @@ import KoaRouter from "koa-router"
 import * as auth from "../auth"
 import { STS, ClientOpts } from "ali-oss"
 import path from "path"
-import { bucket, dir, endpoint } from "@module/etc/oss"
-import { accessKeyId, accessKeySecret, arn } from "@module/etc/oss-sts"
+import { bucket, dir, endpoint } from "@app/etc/src/oss"
+import { accessKeyId, accessKeySecret, arn } from "@app/etc/src/oss-sts"
 const router = new KoaRouter()
 export = router
 const cli = new STS({ accessKeyId, accessKeySecret })
