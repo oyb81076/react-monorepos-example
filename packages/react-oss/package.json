@@ -1,0 +1,12 @@
+{
+  "private": true,
+  "version": "1.0.0",
+  "name": "@app/react-oss",
+  "dependencies": {
+    "@types/react": "^16.4.14",
+    "ali-oss": "^6.0.1",
+    "co": "4",
+    "react": "^16.5.2"
+  },
+  "devDependencies": {}
+}

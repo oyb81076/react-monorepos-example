@@ -1,0 +1,11 @@
+{
+  "name": "@app/etc",
+  "private": true,
+  "version": "1.0.0",
+  "dependencies": {
+    "mongodb": "^3.1.6"
+  },
+  "devDependencies": {
+    "@types/mongodb": "^3.1.9"
+  }
+}
