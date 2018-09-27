@@ -5,9 +5,11 @@
   "private": true,
   "scripts": {
     "test": "jest",
-    "build": "tsc --project tsconfig.prod.json"
+    "build": "gulp",
+    "clean": "rimraf packages/*/{lib,build,dist,*.log}"
   },
   "workspaces": [
-    "packages/*"
+    "packages/*",
+    "scripts"
   ]
 }
