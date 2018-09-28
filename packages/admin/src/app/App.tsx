@@ -1,10 +1,10 @@
-import * as React from "react"
+import React from "react"
 import { Store } from "redux"
 import { History } from "history"
 import { Provider } from "react-redux"
 import { ConnectedRouter } from "react-router-redux"
 import { MuiThemeProvider } from "@material-ui/core/styles"
-import { theme } from "./theme";
+import { theme } from "./theme"
 import Routes from "./Routes"
 interface IProps {
   store: Store

@@ -19,7 +19,11 @@ const editPackageJson = jeditor((pkg: any) => {
 })
 // packages/*/package.json
 gulp.task("packages-package.json", () => {
-  return gulp.src("packages/*/package.json")
+  return gulp
+    .src([
+      "packages/*/package.json",
+      "packages/admin-packager/package.json",
+    ])
     .pipe(editPackageJson)
     .pipe(gulp.dest("./build/packages"))
 })

@@ -1,18 +1,18 @@
 import { normalize } from "./normalize"
 export const join = (...paths: string[]) => {
   if (paths.length === 0) {
-    return '.';
+    return "."
   }
-  let joined;
+  let joined
   for (const arg of paths) {
     if (arg.length > 0) {
       if (joined === undefined) {
-        joined = arg;
+        joined = arg
       } else {
-        joined += '/' + arg
+        joined += "/" + arg
       }
     }
   }
-  if (joined === undefined) { return '.' }
+  if (joined === undefined) { return "." }
   return normalize(joined)
 }

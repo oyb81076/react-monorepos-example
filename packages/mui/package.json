@@ -1,7 +1,6 @@
 {
   "name": "@app/mui",
   "version": "1.0.0",
-  "main": "index.ts",
   "license": "MIT",
   "dependencies": {
     "@material-ui/core": "^3.0.3",

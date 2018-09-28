@@ -4,7 +4,7 @@ import {
   CHAR_LOWERCASE_A,
   CHAR_UPPERCASE_Z,
   CHAR_LOWERCASE_Z,
-  CHAR_UPPERCASE_A
+  CHAR_UPPERCASE_A,
 } from "./constants"
 const isA2Z = (code: number) => {
   return code >= CHAR_UPPERCASE_A && code <= CHAR_UPPERCASE_Z
@@ -12,7 +12,7 @@ const isA2Z = (code: number) => {
 }
 /**
  * 判断是不是绝对地址  "^([a-zA-Z]+:\/\/|\/)"
- * @param path 
+ * @param path
  */
 export const isAbsolute = (path: string): boolean => {
   const len = path.length
@@ -24,6 +24,7 @@ export const isAbsolute = (path: string): boolean => {
     const code = path.charCodeAt(i)
     if (code === CHAR_COLON) {
       if (matchColon) { return false }
+      matchColon++
     } else if (code === CHAR_FORWARD_SLASH) {
       if (matchColon !== 1) {
         return false

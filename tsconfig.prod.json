@@ -6,5 +6,8 @@
   "include": [
     "packages/*/*.ts",
     "packages/*/src/**/*"
+  ],
+  "exclude": [
+    "packages/admin-packager"
   ]
 }

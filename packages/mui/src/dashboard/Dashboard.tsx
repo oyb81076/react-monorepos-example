@@ -1,7 +1,14 @@
 import React from "react"
 import classNames from "classnames"
-import { AppBar, Toolbar, IconButton, Typography, Button, Drawer, Divider } from "@material-ui/core"
-import { Menu as MenuIcon, ChevronLeft as ChevronLeftIcon } from "@material-ui/icons"
+import Divider from "@material-ui/core/Divider"
+import AppBar from "@material-ui/core/AppBar"
+import Toolbar from "@material-ui/core/Toolbar"
+import IconButton from "@material-ui/core/IconButton"
+import Typography from "@material-ui/core/Typography"
+import Button from "@material-ui/core/Button"
+import Drawer from "@material-ui/core/Drawer"
+import MenuIcon from "@material-ui/icons/Menu"
+import ChevronLeftIcon from "@material-ui/icons/ChevronLeft"
 import { styles, IDashboardStyleProps } from "./styles"
 import { compose } from "recompose"
 import { connect } from "react-redux"
@@ -43,7 +50,7 @@ class Dashboard extends React.Component<IProps> {
       <div className={classes.root}>
         <AppBar position="absolute"
           className={classNames(classes.appBar, {
-            [classes.appBarShift]: open,
+            [classes.appBarShift]: menu && open,
           })}>
           <Toolbar
             variant="dense"

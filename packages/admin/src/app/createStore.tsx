@@ -1,4 +1,4 @@
-import { createStore, applyMiddleware, compose, combineReducers, ReducersMapObject, Store } from "redux";
+import { createStore, applyMiddleware, compose, combineReducers, ReducersMapObject, Store } from "redux"
 import { createBrowserHistory } from "history"
 import { routerMiddleware, routerReducer } from "react-router-redux"
 import { reducer as formReducer } from "redux-form"
@@ -7,7 +7,7 @@ export const history = createBrowserHistory()
 const composeEnhancers = window.__REDUX_DEVTOOLS_EXTENSION_COMPOSE__ || compose
 const enhancer = composeEnhancers(
   applyMiddleware(routerMiddleware(history)),
-);
+)
 const reducers: ReducersMapObject = {
   form: formReducer,
   router: routerReducer,

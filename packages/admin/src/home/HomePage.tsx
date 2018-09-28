@@ -1,3 +1,3 @@
 import React from "react"
-const HomePage = () => <div>Home Page</div>
+const HomePage = () => <h1 style={{ textAlign: "center" }}>Home Page</h1>
 export default HomePage

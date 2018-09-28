@@ -1,6 +1,6 @@
 import React from "react"
 import { withRouter, RouteComponentProps } from "react-router"
-import { Button } from "@material-ui/core"
+import Button from "@material-ui/core/Button"
 import classNames from "classnames"
 import { IDashboardStyleProps, styles } from "./styles"
 import { compose } from "recompose"

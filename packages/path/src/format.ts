@@ -3,12 +3,12 @@ export const format = (pathObject: { root: string, dir: string, base: string, ex
   const sep = "/"
   const dir = pathObject.dir || pathObject.root
   const base = pathObject.base ||
-    ((pathObject.name || '') + (pathObject.ext || ''));
+    ((pathObject.name || "") + (pathObject.ext || ""))
   if (!dir) {
-    return base;
+    return base
   }
   if (dir === pathObject.root) {
-    return dir + base;
+    return dir + base
   }
-  return dir + sep + base;
+  return dir + sep + base
 }

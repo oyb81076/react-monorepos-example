@@ -7,14 +7,14 @@ describe("path", () => {
   test("join", () => {
     expect(path.join("ouay", "", "/", "nick")).toEqual("ouay/nick")
   })
-  test("parse", ()=>{
+  test("parse", () => {
     const pathObject = path.parse("http://localhost:22/oyb/n.ts")
     expect(pathObject).toEqual({
       root: "",
       dir: "http://localhost:22/oyb",
       ext: ".ts",
       name: "n",
-      base: "n.ts"
+      base: "n.ts",
     })
   })
   test("format:http", () => {

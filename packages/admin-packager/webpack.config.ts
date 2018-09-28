@@ -30,7 +30,7 @@ const config: webpack.Configuration = {
     pathinfo: true,
     filename: "static/js/bundle.js",
     chunkFilename: "static/js/[name].chunk.js",
-    path: path.join(__dirname, "build"),
+    path: path.join(__dirname, "dist"),
     publicPath: `${PUBLIC_URL}/`,
     devtoolModuleFilenameTemplate: ({ absoluteResourcePath }) => absoluteResourcePath,
   },
@@ -80,15 +80,22 @@ const config: webpack.Configuration = {
       {
         test: /\.css$/,
         use: [
-          __PRO__ ? MiniCssExtractPlugin.loader : require.resolve("style-loader"),
+          __PRO__ ? MiniCssExtractPlugin.loader : { loader: require.resolve("style-loader") },
+          { loader: require.resolve("css-loader") },
         ],
       },
       {
         test: /\.tsx?$/,
         include: [
           path.join(__dirname, "./src"),
-          path.join(__dirname, "../../components"),
+          path.join(__dirname, "../admin/index.ts"),
+          path.join(__dirname, "../admin/src"),
+          path.join(__dirname, "../models"),
+          path.join(__dirname, "../path"),
+          path.join(__dirname, "../mui/index.ts"),
+          path.join(__dirname, "../mui/src"),
         ],
+        exclude: /node_modules/,
         use: [
           { loader: require.resolve("babel-loader") },
           { loader: require.resolve("ts-loader"), options: { transpileOnly: true } },
@@ -103,14 +110,15 @@ const config: webpack.Configuration = {
   },
   plugins: [
     new webpack.IgnorePlugin(/^\.\/locale$/, /moment$/),
+    new webpack.IgnorePlugin(/\@material-ui\/(icons|core)$/),
     new ForkTsCheckerWebpackPlugin({
       async: false,
       watch: !__DEV__ ? undefined : [
         path.join(__dirname, "./src"),
-        path.join(__dirname, "../../components"),
+        path.join(__dirname, ".."),
       ],
-      tsconfig: path.join(__dirname, "../admin/tsconfig.json"),
-      tslint: path.join(__dirname, "../admin/components/tslint.json"),
+      tsconfig: path.join(__dirname, "./tsconfig.react.json"),
+      tslint: path.join(__dirname, "./tslint.json"),
     }),
     new webpack.DefinePlugin({
       "process.env": {
@@ -156,5 +164,5 @@ const config: webpack.Configuration = {
   performance: {
     hints: __DEV__ ? false : "warning",
   },
-};
+}
 export = config
