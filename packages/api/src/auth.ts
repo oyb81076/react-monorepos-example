@@ -3,6 +3,7 @@ import koa from "koa"
 import jwt from "jsonwebtoken"
 import { UserRole } from "@app/models"
 import { secret } from "@app/etc/src/jwt"
+import { Omit } from "lodash"
 declare module "koa" {
   interface Context {
     session: {
@@ -65,7 +66,7 @@ export const oneOf = (...roles: UserRole[]): koa.Middleware => {
  * 生成jwt签名
  * @param session
  */
-export const sign = (session: koa.Context["session"]): string => {
+export const sign = (session: Omit<koa.Context["session"], "exp" | "iat">): string => {
   return jwt.sign(session, secret, { noTimestamp: true, expiresIn: "30d" })
 }
 

@@ -6,7 +6,8 @@
   "scripts": {
     "test": "jest",
     "build": "gulp",
-    "clean": "rimraf packages/*/{lib,build,dist,*.log}"
+    "clean": "rimraf packages/*/{lib,build,dist,*.log}",
+    "start": "cd packages/admin-packager; yarn start"
   },
   "workspaces": [
     "packages/*",

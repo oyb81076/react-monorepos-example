@@ -66,6 +66,7 @@ const config: webpack.Configuration = {
     alias: {
       "@app": path.join(__dirname, ".."),
     },
+    modules: [path.join(__dirname, "../../node_modules")],
     extensions: [".ts", ".tsx", ".js", ".json"],
     plugins: [],
   },
@@ -87,13 +88,15 @@ const config: webpack.Configuration = {
       {
         test: /\.tsx?$/,
         include: [
-          path.join(__dirname, "./src"),
-          path.join(__dirname, "../admin/index.ts"),
-          path.join(__dirname, "../admin/src"),
-          path.join(__dirname, "../models"),
-          path.join(__dirname, "../path"),
-          path.join(__dirname, "../mui/index.ts"),
-          path.join(__dirname, "../mui/src"),
+          path.join(__dirname, ".."),
+          // path.join(__dirname, "./src"),
+          // path.join(__dirname, "../admin/index.ts"),
+          // path.join(__dirname, "../admin/src"),
+          // path.join(__dirname, "../models"),
+          // path.join(__dirname, "../path"),
+          // path.join(__dirname, "../mui/index.ts"),
+          // path.join(__dirname, "../mui/src"),
+          // path.join(__dirname, "../examples/src"),
         ],
         exclude: /node_modules/,
         use: [
